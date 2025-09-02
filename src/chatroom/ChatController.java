@@ -17,13 +17,20 @@ public class ChatController {
         showNewParticipant();
     }
 
-    public void recieveMessage(String name, String message) {
+    public void recieveMessage(String name, String message, ChatWindow currentChatWindow) {
         for (ChatWindow chatWindow : chatWindowArrayList) {
+            if (chatWindow == currentChatWindow) {
+                continue;
+            }
             chatWindow.displayMessage(name, message);
         }
     }
     
     public void showNewParticipant() {
         chatWindowArrayList.get(chatWindowArrayList.size() - 1).setVisible(true);
+    }
+
+    public void removeParticipant(ChatWindow chatWindow) {
+        chatWindowArrayList.remove(chatWindow);
     }
 }

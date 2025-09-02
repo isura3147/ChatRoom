@@ -23,8 +23,13 @@ public class ChatWindow extends javax.swing.JFrame {
         txtAreaSendMessage = new javax.swing.JTextArea();
         btnSend = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setForeground(java.awt.Color.cyan);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosed(java.awt.event.WindowEvent evt) {
+                formWindowClosed(evt);
+            }
+        });
 
         lblChatWindowTitle.setBackground(new java.awt.Color(204, 255, 102));
         lblChatWindowTitle.setFont(new java.awt.Font("STLiti", 0, 18)); // NOI18N
@@ -45,6 +50,7 @@ public class ChatWindow extends javax.swing.JFrame {
 
         btnSend.setBackground(new java.awt.Color(51, 153, 255));
         btnSend.setText("SEND");
+        btnSend.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         btnSend.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnSendActionPerformed(evt);
@@ -56,14 +62,13 @@ public class ChatWindow extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1)
                     .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jScrollPane1))
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
+                        .addGap(18, 18, 18)
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 312, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(36, 36, 36)
+                        .addGap(18, 18, 18)
                         .addComponent(btnSend, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 33, Short.MAX_VALUE)))
                 .addContainerGap())
@@ -93,8 +98,13 @@ public class ChatWindow extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnSendActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSendActionPerformed
-       chatController.recieveMessage(getTitle(), txtAreaSendMessage.getText());
+       chatController.recieveMessage(getTitle(), txtAreaSendMessage.getText(), this);
+       txtAreaDisplayMessage.append("me : " + txtAreaSendMessage.getText() + "\n");
     }//GEN-LAST:event_btnSendActionPerformed
+
+    private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
+        chatController.removeParticipant(this);
+    }//GEN-LAST:event_formWindowClosed
 
     public void displayMessage(String name, String message) {
         txtAreaDisplayMessage.append(name + ": " + message + "\n");
