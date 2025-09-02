@@ -21,9 +21,10 @@ public class AddChatParticipant extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         jLabel1.setText("ADD CHAT PARTICIPANT");
 
+        jLabel2.setFont(new java.awt.Font("Yu Gothic Medium", 1, 12)); // NOI18N
         jLabel2.setText("Participant Name ");
 
-        txtParticipantName.setText("Enter Name");
+        txtParticipantName.setBackground(new java.awt.Color(204, 255, 255));
         txtParticipantName.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtParticipantNameActionPerformed(evt);
@@ -54,10 +55,11 @@ public class AddChatParticipant extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtParticipantName, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(52, Short.MAX_VALUE))
+                .addContainerGap(48, Short.MAX_VALUE))
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void txtParticipantNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtParticipantNameActionPerformed
